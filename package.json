@@ -1,0 +1,62 @@
+{
+  "name": "react-crud-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "start": "rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crud-studio/react-network-core.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crud-studio/react-network-core/issues"
+  },
+  "homepage": "https://github.com/crud-studio/react-network-core#readme",
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/lodash": "^4.14.170",
+    "@types/lru-cache": "^5.1.0",
+    "@types/react": "^16.14.8",
+    "@types/react-dom": "^16.9.13",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/uuid": "^8.3.0",
+    "axios": "^0.21.1",
+    "axios-hooks": "^2.5.0",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0",
+    "lodash": "^4.17.21",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0",
+    "react-use": "^17.2.4",
+    "rollup": "^2.50.1",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "secure-ls": "^1.2.6",
+    "ts-bus": "^2.3.1",
+    "type-fest": "^1.1.3",
+    "typescript": "^4.2.4",
+    "uuid": "^8.3.2"
+  },
+  "peerDependencies": {
+    "axios": "^0.21.1",
+    "axios-hooks": "^2.5.0",
+    "lodash": "^4.17.21",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0",
+    "react-use": "^17.2.4",
+    "secure-ls": "^1.2.6",
+    "ts-bus": "^2.3.1",
+    "type-fest": "^1.1.3",
+    "uuid": "^8.3.2"
+  }
+}
