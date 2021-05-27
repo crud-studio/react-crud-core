@@ -1,8 +1,8 @@
-import {GenericRequestState} from "../../../declerations/internal";
+import {GenericRequestState} from "../../../models/internal";
 import useGenericRequest from "../base/useGenericRequest";
-import {BaseJpaRO} from "../../../declerations/server";
+import {BaseJpaRO} from "../../../models/server";
 import {PartialDeep} from "type-fest";
-import {BaseEntity} from "../../../declerations/entity";
+import {BaseEntity} from "../../../models/entity";
 
 function useCrudCreate<RequestRO, ResponseRO extends BaseJpaRO>(
   entity: BaseEntity,

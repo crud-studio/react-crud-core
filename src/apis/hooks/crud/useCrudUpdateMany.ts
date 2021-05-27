@@ -1,5 +1,5 @@
-import {GenericRequestStateMany} from "../../../declerations/internal";
-import {BaseEntity} from "../../../declerations/entity";
+import {GenericRequestStateMany} from "../../../models/internal";
+import {BaseEntity} from "../../../models/entity";
 import useGenericRequestMany from "../base/useGenericRequestMany";
 
 function useCrudUpdateMany<RequestRO, ResponseRO>(

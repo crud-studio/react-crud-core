@@ -1,7 +1,7 @@
-import {GenericRequestState} from "../../../declerations/internal";
-import {BaseEntity} from "../../../declerations/entity";
+import {GenericRequestState} from "../../../models/internal";
+import {BaseEntity} from "../../../models/entity";
 import useGenericRequest from "../base/useGenericRequest";
-import {BaseJpaRO} from "../../../declerations/server";
+import {BaseJpaRO} from "../../../models/server";
 import {PartialDeep} from "type-fest";
 
 function useCrudUpdate<ResponseRO extends BaseJpaRO>(

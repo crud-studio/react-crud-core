@@ -1,5 +1,5 @@
-import {GenericRequestState} from "../../../declerations/internal";
-import {BaseEntity} from "../../../declerations/entity";
+import {GenericRequestState} from "../../../models/internal";
+import {BaseEntity} from "../../../models/entity";
 import useGenericRequest from "../base/useGenericRequest";
 
 interface Options {

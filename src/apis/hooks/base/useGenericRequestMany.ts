@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import useGenericRequest, {RequestConfig, RequestOptions} from "./useGenericRequest";
-import {ManyCrudResult, ManyFailedReason} from "../../../declerations/server";
-import {GenericRequestStateMany} from "../../../declerations/internal";
+import {ManyCrudResult, ManyFailedReason} from "../../../models/server";
+import {GenericRequestStateMany} from "../../../models/internal";
 
 function useGenericRequestMany<RequestRO, ResponseRO>(
   config: RequestConfig,

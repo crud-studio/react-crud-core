@@ -1,8 +1,8 @@
 import {useCallback, useEffect, useState} from "react";
-import {GenericRequestStateSearch} from "../../../declerations/internal";
-import {BaseEntity} from "../../../declerations/entity";
+import {GenericRequestStateSearch} from "../../../models/internal";
+import {BaseEntity} from "../../../models/entity";
 import useGenericRequest from "../base/useGenericRequest";
-import {FilterField, OrderDTO} from "../../../declerations/server";
+import {FilterField, OrderDTO} from "../../../models/server";
 
 interface Options {
   manual?: boolean;

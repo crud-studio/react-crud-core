@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {GenericRequestStateUpload} from "../../../declerations/internal";
+import {GenericRequestStateUpload} from "../../../models/internal";
 import useGenericRequest from "./useGenericRequest";
 
 function useGenericRequestUpload<ResponseRO>(file: File | undefined, url: string): GenericRequestStateUpload<ResponseRO> {

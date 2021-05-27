@@ -15,13 +15,23 @@ import useCrudSearchCount from "./apis/hooks/crud/useCrudSearchCount";
 import useCrudShow from "./apis/hooks/crud/useCrudShow";
 import useCrudUpdate from "./apis/hooks/crud/useCrudUpdate";
 import useCrudUpdateMany from "./apis/hooks/crud/useCrudUpdateMany";
-import {BaseEntity} from './declerations/entity';
+import LocalStorageWrapper from "./helpers/LocalStorageWrapper";
+import UpdatePackUtils from './helpers/UpdatePackUtils';
+import {UrlOptions, addUrlParams, buildUrl, getUrlParam, getUrlParams, getUrlParamsQuerystring, removeUrlParam, setUrlParams, updateQuerystring} from './helpers/UrlUtils';
+import useDebounceFn from "./hooks/useDebounceFn";
+import {useItemDetailsState} from "./hooks/useItemDetailsState";
+import {useItemIdUrlState} from "./hooks/useItemIdUrlState";
+import {usePagination} from "./hooks/usePagination";
+import useScript from "./hooks/useScript";
+import {useUrlState} from "./hooks/useUrlState";
+import {useUrlStateString} from "./hooks/useUrlStateString";
+import {BaseEntity} from './models/entity';
 import {
     GenericRequestState,
     GenericRequestStateMany,
     GenericRequestStateSearch,
     GenericRequestStateUpload
-} from './declerations/internal';
+} from './models/internal';
 import {
     BaseJpaRO,
     FilterField,
@@ -38,19 +48,22 @@ import {
     ResultRO,
     PagingRO,
     ResultErrorDTO
-} from './declerations/server';
-import LocalStorageWrapper from "./helpers/LocalStorageWrapper";
-import UpdatePackUtils from './helpers/UpdatePackUtils';
-import {UrlOptions, addUrlParams, buildUrl, getUrlParam, getUrlParams, getUrlParamsQuerystring, removeUrlParam, setUrlParams, updateQuerystring} from './helpers/UrlUtils';
-import useDebounceFn from "./hooks/useDebounceFn";
-import {useItemDetailsState} from "./hooks/useItemDetailsState";
-import {useItemIdUrlState} from "./hooks/useItemIdUrlState";
-import {usePagination} from "./hooks/usePagination";
-import useScript from "./hooks/useScript";
-import {useUrlState} from "./hooks/useUrlState";
-import {useUrlStateString} from "./hooks/useUrlStateString";
+} from './models/server';
 
 export {cacheAdapterEnhancer, throttleAdapterEnhancer};
+
+export {LocalStorageWrapper, UpdatePackUtils};
+export {UrlOptions, addUrlParams, buildUrl, getUrlParam, getUrlParams, getUrlParamsQuerystring, removeUrlParam, setUrlParams, updateQuerystring};
+
+export {
+    useDebounceFn,
+    useItemDetailsState,
+    useItemIdUrlState,
+    usePagination,
+    useScript,
+    useUrlState,
+    useUrlStateString
+};
 
 export {useGenericRequest, RequestConfig, RequestOptions, useGenericRequestMany, useGenericRequestUpload};
 export {
@@ -85,17 +98,4 @@ export {
     ResultRO,
     PagingRO,
     ResultErrorDTO
-};
-
-export {LocalStorageWrapper, UpdatePackUtils};
-export {UrlOptions, addUrlParams, buildUrl, getUrlParam, getUrlParams, getUrlParamsQuerystring, removeUrlParam, setUrlParams, updateQuerystring};
-
-export {
-    useDebounceFn,
-    useItemDetailsState,
-    useItemIdUrlState,
-    usePagination,
-    useScript,
-    useUrlState,
-    useUrlStateString
 };

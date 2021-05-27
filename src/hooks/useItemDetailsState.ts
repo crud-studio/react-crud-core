@@ -9,8 +9,8 @@ import useDebounceFn from "./useDebounceFn";
 import UpdatePackUtils from "../helpers/UpdatePackUtils";
 import {useUrlStateString} from "./useUrlStateString";
 import {PartialDeep} from "type-fest";
-import {BaseEntity} from "../declerations/entity";
-import {BaseJpaRO} from "../declerations/server";
+import {BaseEntity} from "../models/entity";
+import {BaseJpaRO} from "../models/server";
 import {URL_PARAM_UPDATE_PACK} from "../constants/urlKeys";
 
 export const useItemDetailsState = <EntityRO extends BaseJpaRO>(

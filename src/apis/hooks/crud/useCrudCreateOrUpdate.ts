@@ -1,10 +1,10 @@
 import {useCallback, useEffect, useState} from "react";
-import {GenericRequestState} from "../../../declerations/internal";
-import {BaseEntity} from "../../../declerations/entity";
+import {GenericRequestState} from "../../../models/internal";
+import {BaseEntity} from "../../../models/entity";
 import useCrudCreate from "./useCrudCreate";
 import useCrudUpdate from "./useCrudUpdate";
 import _ from "lodash";
-import {BaseJpaRO} from "../../../declerations/server";
+import {BaseJpaRO} from "../../../models/server";
 import {PartialDeep} from "type-fest";
 
 function useCrudCreateOrUpdate<ResponseRO extends BaseJpaRO>(

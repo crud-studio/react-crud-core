@@ -1,6 +1,6 @@
 import useAxios from "axios-hooks";
 import {useCallback, useEffect, useState} from "react";
-import {GenericRequestState} from "../../../declerations/internal";
+import {GenericRequestState} from "../../../models/internal";
 import _ from "lodash";
 import {useUpdateEffect} from "react-use";
 import {eventBus, eventRequestCacheCleared} from "../../../helpers/EventBus";
