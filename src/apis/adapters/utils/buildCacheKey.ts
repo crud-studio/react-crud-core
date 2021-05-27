@@ -1,5 +1,4 @@
-// @ts-ignore
-import buildURL from "axios/lib/helpers/buildURL";
+import {buildCacheUrl} from "./buildCacheUrl";
 
 export function buildCacheKey(
   url: string | undefined,
@@ -8,15 +7,15 @@ export function buildCacheKey(
   method?: string,
   data?: string
 ) {
-  let cacheKey = buildSortedURL(url, params, paramsSerializer);
+  let cacheKey = buildSortedURL(url || "", params, paramsSerializer);
   if (!!data) {
     cacheKey += `|${method || ""}|${data || ""}`;
   }
   return cacheKey;
 }
 
-export function buildSortedURL(...args: any[]) {
-  const builtURL = buildURL(...args);
+export function buildSortedURL(url: string, params: object, paramsSerializer: any): string {
+  const builtURL = buildCacheUrl(url, params, paramsSerializer);
 
   const [urlPath, queryString] = builtURL.split("?");
 

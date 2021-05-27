@@ -14,12 +14,33 @@ import useCrudSearchCount from "./apis/hooks/crud/useCrudSearchCount";
 import useCrudShow from "./apis/hooks/crud/useCrudShow";
 import useCrudUpdate from "./apis/hooks/crud/useCrudUpdate";
 import useCrudUpdateMany from "./apis/hooks/crud/useCrudUpdateMany";
-import * as Entity from './declerations/entity'
-import * as Internal from './declerations/internal'
-import * as Server from './declerations/server'
+import {BaseEntity} from './declerations/entity';
+import {
+    GenericRequestState,
+    GenericRequestStateMany,
+    GenericRequestStateSearch,
+    GenericRequestStateUpload
+} from './declerations/internal';
+import {
+    BaseJpaRO,
+    FilterField,
+    FilterFieldOperation,
+    BaseJpaUpdatableRO,
+    BaseRO,
+    BaseModelFilter,
+    DynamicModelFilter,
+    FilterFieldDataType,
+    OrderDTO,
+    KeyValuePair,
+    ManyCrudResult,
+    ManyFailedReason,
+    ResultRO,
+    PagingRO,
+    ResultErrorDTO
+} from './declerations/server';
 import LocalStorageWrapper from "./helpers/LocalStorageWrapper";
-import * as UrlUtils from './helpers/UrlUtils'
-import * as UpdatePackUtils from './helpers/UpdatePackUtils'
+import UpdatePackUtils from './helpers/UpdatePackUtils';
+import {UrlOptions, addUrlParams, buildUrl, getUrlParam, getUrlParams, getUrlParamsQuerystring, removeUrlParam, setUrlParams, updateQuerystring} from './helpers/UrlUtils';
 import useDebounceFn from "./hooks/useDebounceFn";
 import {useItemDetailsState} from "./hooks/useItemDetailsState";
 import {useItemIdUrlState} from "./hooks/useItemIdUrlState";
@@ -45,9 +66,28 @@ export {
     useCrudUpdateMany
 };
 
-export {Entity, Internal, Server};
+export {BaseEntity};
+export {GenericRequestState, GenericRequestStateMany, GenericRequestStateSearch, GenericRequestStateUpload};
+export {
+    BaseJpaRO,
+    FilterField,
+    FilterFieldOperation,
+    BaseJpaUpdatableRO,
+    BaseRO,
+    BaseModelFilter,
+    DynamicModelFilter,
+    FilterFieldDataType,
+    OrderDTO,
+    KeyValuePair,
+    ManyCrudResult,
+    ManyFailedReason,
+    ResultRO,
+    PagingRO,
+    ResultErrorDTO
+};
 
-export {LocalStorageWrapper, UpdatePackUtils, UrlUtils};
+export {LocalStorageWrapper, UpdatePackUtils};
+export {UrlOptions, addUrlParams, buildUrl, getUrlParam, getUrlParams, getUrlParamsQuerystring, removeUrlParam, setUrlParams, updateQuerystring};
 
 export {
     useDebounceFn,
