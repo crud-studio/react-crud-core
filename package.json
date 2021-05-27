@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/crud-studio/react-network-core.git"
+    "url": "git+https://github.com/crud-studio/react-crud-core.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/crud-studio/react-network-core/issues"
+    "url": "https://github.com/crud-studio/react-crud-core/issues"
   },
-  "homepage": "https://github.com/crud-studio/react-network-core#readme",
+  "homepage": "https://github.com/crud-studio/react-crud-core#readme",
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/lodash": "^4.14.170",
