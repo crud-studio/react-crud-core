@@ -8,15 +8,14 @@ export interface KeyValuePair<K, V> {
 
 export interface ResultErrorDTO {
   key: string;
-  id?: string;
   message?: string;
   params: KeyValuePair<string, any | undefined>[];
   stackTrace?: string;
 }
 
 export interface ResultRO<Payload> {
+  requestId?: string;
   success: boolean;
-  error?: string;
   errorObject?: ResultErrorDTO;
   result?: Payload;
   paging?: PagingRO;
