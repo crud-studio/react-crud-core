@@ -1,6 +1,7 @@
 import cacheAdapterEnhancer from "./apis/adapters/cacheAdapterEnhancer";
 import throttleAdapterEnhancer from "./apis/adapters/throttleAdapterEnhancer";
 import useGenericRequest from "./apis/hooks/base/useGenericRequest";
+import {RequestConfig, RequestOptions} from "./apis/hooks/base/useGenericRequest";
 import useGenericRequestMany from "./apis/hooks/base/useGenericRequestMany";
 import useGenericRequestUpload from "./apis/hooks/base/useGenericRequestUpload";
 import useCrudCreate from "./apis/hooks/crud/useCrudCreate";
@@ -51,7 +52,7 @@ import {useUrlStateString} from "./hooks/useUrlStateString";
 
 export {cacheAdapterEnhancer, throttleAdapterEnhancer};
 
-export {useGenericRequest, useGenericRequestMany, useGenericRequestUpload};
+export {useGenericRequest, RequestConfig, RequestOptions, useGenericRequestMany, useGenericRequestUpload};
 export {
     useCrudCreate,
     useCrudCreateMany,
