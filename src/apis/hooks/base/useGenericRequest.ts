@@ -2,8 +2,7 @@ import useAxios from "axios-hooks";
 import {useCallback, useEffect, useState} from "react";
 import {GenericRequestState} from "../../../models/internal";
 import _ from "lodash";
-import {useUpdateEffect} from "react-use";
-import {eventBus, eventRequestCacheCleared} from "../../../helpers/EventBus";
+import {createGlobalState, useUpdateEffect} from "react-use";
 
 export interface RequestConfig {
   url: string;
@@ -27,6 +26,8 @@ export interface RequestOptions<ResponseRO> {
   successTransformer?: (responseData: any) => boolean;
 }
 
+const useGlobalClearedCacheName = createGlobalState<{cacheName: string;} | undefined>(undefined);
+
 function useGenericRequest<ResponseRO>(
   config: RequestConfig,
   {
@@ -44,7 +45,7 @@ function useGenericRequest<ResponseRO>(
 ): GenericRequestState<ResponseRO> {
   const [requestConfig, setRequestConfig] = useState<RequestConfig | undefined>(undefined);
   const [pendingRequestConfig, setPendingRequestConfig] = useState<RequestConfig | undefined>(undefined);
-  const [clearedCacheName, setClearedCacheName] = useState<string | undefined>(undefined);
+  const [clearedCacheName, setClearedCacheName] = useGlobalClearedCacheName();
 
   const [result, setResult] = useState<ResponseRO | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
@@ -102,7 +103,7 @@ function useGenericRequest<ResponseRO>(
       setError(undefined);
 
       if (clearCache && cacheName) {
-        eventBus.publish(eventRequestCacheCleared({cacheName: cacheName}));
+        setClearedCacheName({cacheName: cacheName});
       }
     } else {
       setResult(undefined);
@@ -161,24 +162,9 @@ function useGenericRequest<ResponseRO>(
     }
   }, [serverError]);
 
-  useEffect(() => {
-    if (!cacheAutoReload || !cacheName) {
-      return;
-    }
-
-    const unsubscribe = eventBus.subscribe(eventRequestCacheCleared, (event) => {
-      const {cacheName} = event.payload;
-      setClearedCacheName(cacheName);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
   useUpdateEffect(() => {
-    if (clearedCacheName) {
-      setClearedCacheName(undefined);
-      if (cacheName === clearedCacheName && cache) {
+    if (cache && cacheAutoReload && cacheName && clearedCacheName) {
+      if (cacheName === clearedCacheName.cacheName) {
         executeRequest();
       }
     }
