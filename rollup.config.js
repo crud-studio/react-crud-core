@@ -16,5 +16,5 @@ export default {
   plugins: [
     typescript({objectHashIgnoreUnknownHack: true})
   ],
-  external: ['axios', 'axios-hooks', 'lodash', 'lru-cache', 'react', 'react-dom', 'react-router-dom', 'react-use', 'secure-ls', 'ts-bus', 'type-fest', 'uuid']
+  external: ['axios', 'axios-hooks', 'lodash', 'react', 'react-dom', 'react-router-dom', 'react-use', 'secure-ls', 'type-fest', 'uuid']
 }
