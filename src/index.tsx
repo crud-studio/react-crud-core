@@ -15,6 +15,7 @@ import useCrudSearchCount from "./apis/hooks/crud/useCrudSearchCount";
 import useCrudShow from "./apis/hooks/crud/useCrudShow";
 import useCrudUpdate from "./apis/hooks/crud/useCrudUpdate";
 import useCrudUpdateMany from "./apis/hooks/crud/useCrudUpdateMany";
+import Fingerprint from "./helpers/Fingerprint";
 import LocalStorageWrapper from "./helpers/LocalStorageWrapper";
 import UpdatePackUtils from './helpers/UpdatePackUtils';
 import {UrlOptions, addUrlParams, buildUrl, getUrlParam, getUrlParams, getUrlParamsQuerystring, removeUrlParam, setUrlParams, updateQuerystring} from './helpers/UrlUtils';
@@ -52,7 +53,7 @@ import {
 
 export {cacheAdapterEnhancer, throttleAdapterEnhancer};
 
-export {LocalStorageWrapper, UpdatePackUtils};
+export {Fingerprint, LocalStorageWrapper, UpdatePackUtils};
 export {UrlOptions, addUrlParams, buildUrl, getUrlParam, getUrlParams, getUrlParamsQuerystring, removeUrlParam, setUrlParams, updateQuerystring};
 
 export {
