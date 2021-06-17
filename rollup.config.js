@@ -1,6 +1,4 @@
 import typescript from 'rollup-plugin-typescript2'
-import commonjs from '@rollup/plugin-commonjs';
-import {nodeResolve} from '@rollup/plugin-node-resolve';
 
 import pkg from './package.json'
 
@@ -17,8 +15,6 @@ export default {
   ],
   plugins: [
     typescript({objectHashIgnoreUnknownHack: true}),
-    commonjs(),
-    nodeResolve()
   ],
-  external: ['axios', 'axios-hooks', 'lodash', 'react', 'react-dom', 'react-router-dom', 'react-use', 'secure-ls', 'type-fest', 'uuid']
+  external: ['axios', 'axios-hooks', 'fingerprintjs2', 'lodash', 'lru-cache', 'react', 'react-dom', 'react-router-dom', 'react-use', 'secure-ls', 'type-fest', 'uuid']
 }
