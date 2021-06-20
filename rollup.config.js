@@ -1,20 +1,31 @@
-import typescript from 'rollup-plugin-typescript2'
+import typescript from "rollup-plugin-typescript2";
 
-import pkg from './package.json'
+import pkg from "./package.json";
 
 export default {
-  input: 'src/index.tsx',
+  input: "src/index.tsx",
   output: [
     {
       file: pkg.main,
-      format: 'cjs',
-      exports: 'named',
+      format: "cjs",
+      exports: "named",
       sourcemap: true,
-      strict: false
-    }
+      strict: false,
+    },
   ],
-  plugins: [
-    typescript({objectHashIgnoreUnknownHack: true}),
+  plugins: [typescript({objectHashIgnoreUnknownHack: true})],
+  external: [
+    "axios",
+    "axios-hooks",
+    "fingerprintjs2",
+    "lodash",
+    "lru-cache",
+    "react",
+    "react-dom",
+    "react-router-dom",
+    "react-use",
+    "secure-ls",
+    "type-fest",
+    "uuid",
   ],
-  external: ['axios', 'axios-hooks', 'fingerprintjs2', 'lodash', 'lru-cache', 'react', 'react-dom', 'react-router-dom', 'react-use', 'secure-ls', 'type-fest', 'uuid']
-}
+};

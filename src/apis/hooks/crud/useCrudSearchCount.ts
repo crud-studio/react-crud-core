@@ -16,7 +16,7 @@ function useCrudSearchCount(
     manual: false,
     cache: false,
     throttle: false,
-  },
+  }
 ): GenericRequestState<number> {
   return useGenericRequest<number>(
     {

@@ -1,17 +1,17 @@
 import _ from "lodash";
 
 function encode(val: string): string {
-  return encodeURIComponent(val).
-  replace(/%3A/gi, ':').
-  replace(/%24/g, '$').
-  replace(/%2C/gi, ',').
-  replace(/%20/g, '+').
-  replace(/%5B/gi, '[').
-  replace(/%5D/gi, ']');
+  return encodeURIComponent(val)
+    .replace(/%3A/gi, ":")
+    .replace(/%24/g, "$")
+    .replace(/%2C/gi, ",")
+    .replace(/%20/g, "+")
+    .replace(/%5B/gi, "[")
+    .replace(/%5D/gi, "]");
 }
 
 function isURLSearchParams(val: any): boolean {
-  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+  return typeof URLSearchParams !== "undefined" && val instanceof URLSearchParams;
 }
 
 /**
@@ -36,12 +36,12 @@ export function buildCacheUrl(url: string, params: object, paramsSerializer: any
     var parts: any[] = [];
 
     _.forEach(params, function serialize(val: any, key: string) {
-      if (val === null || typeof val === 'undefined') {
+      if (val === null || typeof val === "undefined") {
         return;
       }
 
       if (_.isArray(val)) {
-        key = key + '[]';
+        key = key + "[]";
       } else {
         val = [val];
       }
@@ -52,20 +52,20 @@ export function buildCacheUrl(url: string, params: object, paramsSerializer: any
         } else if (_.isObject(v)) {
           v = JSON.stringify(v);
         }
-        parts.push(encode(key) + '=' + encode(v));
+        parts.push(encode(key) + "=" + encode(v));
       });
     });
 
-    serializedParams = parts.join('&');
+    serializedParams = parts.join("&");
   }
 
   if (serializedParams) {
-    var hashmarkIndex = url.indexOf('#');
+    var hashmarkIndex = url.indexOf("#");
     if (hashmarkIndex !== -1) {
       url = url.slice(0, hashmarkIndex);
     }
 
-    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+    url += (url.indexOf("?") === -1 ? "?" : "&") + serializedParams;
   }
 
   return url;

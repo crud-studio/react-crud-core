@@ -82,6 +82,36 @@ export interface PagingRO {
   hasMore: boolean;
 }
 
-export type FilterFieldOperation = "Equal" | "NotEqual" | "In" | "NotIn" | "GreaterThan" | "GreaterEqual" | "LowerThan" | "LowerEqual" | "Between" | "Contains" | "IsNull" | "IsNotNull" | "And" | "Or" | "Not" | "ContainsIn" | "NotContainsIn" | "RawJunction" | "StartsWith" | "EndsWith" | "Noop";
+export type FilterFieldOperation =
+  | "Equal"
+  | "NotEqual"
+  | "In"
+  | "NotIn"
+  | "GreaterThan"
+  | "GreaterEqual"
+  | "LowerThan"
+  | "LowerEqual"
+  | "Between"
+  | "Contains"
+  | "IsNull"
+  | "IsNotNull"
+  | "And"
+  | "Or"
+  | "Not"
+  | "ContainsIn"
+  | "NotContainsIn"
+  | "RawJunction"
+  | "StartsWith"
+  | "EndsWith"
+  | "Noop";
 
-export type FilterFieldDataType = "String" | "Integer" | "Long" | "Double" | "Boolean" | "Date" | "Object" | "Enum" | "None";
+export type FilterFieldDataType =
+  | "String"
+  | "Integer"
+  | "Long"
+  | "Double"
+  | "Boolean"
+  | "Date"
+  | "Object"
+  | "Enum"
+  | "None";

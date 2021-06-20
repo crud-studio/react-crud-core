@@ -1,13 +1,17 @@
 import {useEffect, useState} from "react";
 
-export const usePagination = <T>(items: T[], pageSize = 50):
-  [{
+export const usePagination = <T>(
+  items: T[],
+  pageSize = 50
+): [
+  {
     pageItems: T[];
     currentPage: number;
     totalPages: number;
     pageSize: number;
-  }, (currentPage: number) => void] => {
-
+  },
+  (currentPage: number) => void
+] => {
   const [pageItems, setPageItems] = useState<T[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);

@@ -24,4 +24,3 @@ export interface GenericRequestStateSearch<ResponseRO> extends GenericRequestSta
 export interface GenericRequestStateUpload<ResponseRO> extends GenericRequestState<ResponseRO> {
   progress: number;
 }
-

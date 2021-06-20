@@ -2,7 +2,10 @@ import {useEffect, useState} from "react";
 import {GenericRequestStateUpload} from "../../../models/internal";
 import useGenericRequest from "./useGenericRequest";
 
-function useGenericRequestUpload<ResponseRO>(file: File | undefined, url: string): GenericRequestStateUpload<ResponseRO> {
+function useGenericRequestUpload<ResponseRO>(
+  file: File | undefined,
+  url: string
+): GenericRequestStateUpload<ResponseRO> {
   const [progress, setProgress] = useState<number>(0);
   const [formData, setFormData] = useState<FormData | null>(null);
 

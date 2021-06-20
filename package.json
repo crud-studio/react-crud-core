@@ -8,7 +8,9 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "start": "rollup -c -w"
+    "start": "rollup -c -w",
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|css|md|vue)\""
   },
   "repository": {
     "type": "git",
@@ -34,6 +36,11 @@
     "@types/uuid": "^8.3.0",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "6.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.1",
     "rollup": "^2.51.2",
     "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.3.2"
@@ -50,5 +57,35 @@
     "secure-ls": "^1.2.6",
     "type-fest": "^1.2.0",
     "uuid": "^8.3.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "plugin:prettier/recommended"
+    ],
+    "rules": {
+      "react-hooks/exhaustive-deps": "off"
+    }
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "printWidth": 120,
+    "bracketSpacing": false,
+    "trailingComma": "es5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.+(js|jsx|ts|tsx)": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.+(json|css|md)": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

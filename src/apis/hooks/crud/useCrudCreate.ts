@@ -6,7 +6,7 @@ import {BaseEntity} from "../../../models/entity";
 
 function useCrudCreate<RequestRO, ResponseRO extends BaseJpaRO>(
   entity: BaseEntity,
-  dataItem: PartialDeep<RequestRO> | undefined,
+  dataItem: PartialDeep<RequestRO> | undefined
 ): GenericRequestState<ResponseRO> {
   return useGenericRequest<ResponseRO>(
     {

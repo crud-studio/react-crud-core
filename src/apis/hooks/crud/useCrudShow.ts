@@ -15,7 +15,7 @@ function useCrudShow<ResponseRO>(
     manual: false,
     cache: false,
     throttle: false,
-  },
+  }
 ): GenericRequestState<ResponseRO> {
   return useGenericRequest<ResponseRO>(
     {

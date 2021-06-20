@@ -16,7 +16,7 @@ import {URL_PARAM_UPDATE_PACK} from "../constants/urlKeys";
 export const useItemDetailsState = <EntityRO extends BaseJpaRO>(
   entity: BaseEntity,
   generateEmptyItem: (() => EntityRO) | undefined,
-  generateUrlFn: (id?: number) => string,
+  generateUrlFn: (id?: number) => string
 ): {
   initialValue: Partial<EntityRO>;
   item: (EntityRO & {uniqueKey?: string}) | undefined;

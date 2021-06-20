@@ -26,7 +26,7 @@ export interface RequestOptions<ResponseRO> {
   successTransformer?: (responseData: any) => boolean;
 }
 
-const useGlobalClearedCacheName = createGlobalState<{cacheName: string;} | undefined>(undefined);
+const useGlobalClearedCacheName = createGlobalState<{cacheName: string} | undefined>(undefined);
 
 function useGenericRequest<ResponseRO>(
   config: RequestConfig,
@@ -52,26 +52,23 @@ function useGenericRequest<ResponseRO>(
   const [error, setError] = useState<any>(undefined);
   const [executed, setExecuted] = useState<boolean>(false);
 
-  const [
-    {data: responseData, loading: requestLoading, error: serverError},
-    executeAxiosRequest,
-    manualCancel,
-  ] = useAxios(
-    {
-      url: requestConfig?.url || "",
-      method: requestConfig?.method || "GET",
-      data: requestConfig?.data,
-      headers: requestConfig?.headers,
-      responseType: requestConfig?.responseType,
-      cache: cache,
-      clearCache: clearCache,
-      cacheName: cacheName,
-      throttle: throttle,
-      timeout: timeout,
-      onUploadProgress: requestConfig?.onUploadProgress,
-    },
-    {manual: true}
-  );
+  const [{data: responseData, loading: requestLoading, error: serverError}, executeAxiosRequest, manualCancel] =
+    useAxios(
+      {
+        url: requestConfig?.url || "",
+        method: requestConfig?.method || "GET",
+        data: requestConfig?.data,
+        headers: requestConfig?.headers,
+        responseType: requestConfig?.responseType,
+        cache: cache,
+        clearCache: clearCache,
+        cacheName: cacheName,
+        throttle: throttle,
+        timeout: timeout,
+        onUploadProgress: requestConfig?.onUploadProgress,
+      },
+      {manual: true}
+    );
 
   useEffect(() => {
     if (!manual && config) {

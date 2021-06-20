@@ -9,7 +9,7 @@ import {PartialDeep} from "type-fest";
 
 function useCrudCreateOrUpdate<ResponseRO extends BaseJpaRO>(
   entity: BaseEntity,
-  dataItem: PartialDeep<ResponseRO> | undefined,
+  dataItem: PartialDeep<ResponseRO> | undefined
 ): GenericRequestState<ResponseRO> {
   const [requestItem, setRequestItem] = useState<PartialDeep<ResponseRO> | undefined>(undefined);
   const [pendingRequestItem, setPendingRequestItem] = useState<PartialDeep<ResponseRO> | undefined>(undefined);
