@@ -50,7 +50,6 @@ export const useItemDetailsState = <EntityRO extends BaseJpaRO>(
     (updatedItem: EntityRO & {uniqueKey?: string}): void => {
       if (updatePackId) {
         const updatePack = UpdatePackUtils.popUpdatePack(updatePackId);
-        console.log(updatePackId, updatePack);
         setUpdatePackId("");
 
         if (updatePack) {
