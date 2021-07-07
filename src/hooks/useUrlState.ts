@@ -34,6 +34,9 @@ export const useUrlState = <T>(
     } else {
       removeUrlParam(urlParam, addToHistory);
     }
+    return () => {
+      removeUrlParam(urlParam, false);
+    };
   }, [state]);
 
   return [state, setState];
