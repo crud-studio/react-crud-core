@@ -36,7 +36,6 @@
     "@types/lru-cache": "^5.1.0",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.7",
-    "@types/react-router-dom": "^5.1.7",
     "@types/uuid": "^8.3.0",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
