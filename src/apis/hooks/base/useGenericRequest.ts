@@ -126,13 +126,13 @@ function useGenericRequest<ResponseRO>(
     if (loading) {
       setPendingRequestConfig(config);
     } else {
-      setRequestConfig(config);
+      setRequestConfig({...config});
     }
   }, [config, loading, setPendingRequestConfig, setRequestConfig]);
 
   useUpdateEffect(() => {
     if (!loading && pendingRequestConfig) {
-      setRequestConfig(pendingRequestConfig);
+      setRequestConfig({...pendingRequestConfig});
       setPendingRequestConfig(undefined);
     }
   }, [loading]);
