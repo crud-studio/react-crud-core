@@ -1,18 +1,14 @@
 import {Dispatch, SetStateAction, useState} from "react";
-import {useRouteMatch} from "react-router-dom";
 import {useUpdateEffect} from "react-use";
-
-interface MatchParams {
-  id?: string;
-}
+import {useParams} from "react-router-dom";
 
 export const useItemIdUrlState = (
   generateUrlFn: (id?: number) => string
 ): [number, Dispatch<SetStateAction<number>>] => {
-  const match = useRouteMatch<MatchParams>();
+  const params = useParams();
 
   const getUrlId = (): number => {
-    return parseInt(match.params.id || "0");
+    return parseInt(params.id || "0");
   };
 
   const [itemId, setItemId] = useState<number>(getUrlId());
