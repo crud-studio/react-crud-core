@@ -10,10 +10,10 @@ import UpdatePackUtils from "../helpers/UpdatePackUtils";
 import {useUrlStateString} from "./useUrlStateString";
 import {PartialDeep} from "type-fest";
 import {BaseEntity} from "../models/entity";
-import {BaseJpaRO} from "../models/server";
 import {URL_PARAM_UPDATE_PACK} from "../constants/urlKeys";
+import {AbstractJpaRO} from "../models/server";
 
-export const useItemDetailsState = <EntityRO extends BaseJpaRO>(
+export const useItemDetailsState = <EntityRO extends AbstractJpaRO>(
   entity: BaseEntity,
   generateEmptyItem: (() => EntityRO) | undefined,
   generateUrlFn: (id?: number) => string
@@ -120,7 +120,7 @@ export const useItemDetailsState = <EntityRO extends BaseJpaRO>(
 
       if (!item || item.id !== saveState.result.id || !hasChanges) {
         setItem(saveState.result);
-        setItemId(saveState.result.id);
+        setItemId(saveState.result.id || 0);
       }
 
       setSaving(false);

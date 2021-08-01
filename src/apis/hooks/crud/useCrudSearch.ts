@@ -2,7 +2,7 @@ import {useCallback, useEffect, useState} from "react";
 import {GenericRequestStateSearch} from "../../../models/internal";
 import {BaseEntity} from "../../../models/entity";
 import useGenericRequest from "../base/useGenericRequest";
-import {FilterField, OrderDTO} from "../../../models/server";
+import {DynamicModelFilter, FilterField, OrderDTO} from "../../../models/server";
 
 interface Options {
   manual?: boolean;
@@ -72,7 +72,7 @@ function useCrudSearch<ResponseRO>(
     {
       url: `${entity.api.path}/search`,
       method: "POST",
-      data: {
+      data: <DynamicModelFilter>{
         start: start,
         limit: limit,
         filterFields: filterFields,

@@ -1,10 +1,10 @@
 import {GenericRequestState} from "../../../models/internal";
 import {BaseEntity} from "../../../models/entity";
 import useGenericRequest from "../base/useGenericRequest";
-import {BaseJpaRO} from "../../../models/server";
+import {AbstractJpaRO} from "../../../models/server";
 import {PartialDeep} from "type-fest";
 
-function useCrudUpdate<ResponseRO extends BaseJpaRO>(
+function useCrudUpdate<ResponseRO extends AbstractJpaRO>(
   entity: BaseEntity,
   dataItem: PartialDeep<ResponseRO> | undefined
 ): GenericRequestState<ResponseRO> {

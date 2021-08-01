@@ -1,9 +1,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export interface KeyValuePair<K, V> {
-  key: K;
-  value: V;
+export interface AbstractJpaRO {
+  id?: number;
+}
+
+export interface AbstractJpaUpdatableRO extends AbstractJpaRO {
+  creationTime?: DateAsNumber;
+  lastUpdateTime?: DateAsNumber;
 }
 
 export interface ResultErrorDTO {
@@ -14,8 +18,8 @@ export interface ResultErrorDTO {
 }
 
 export interface ResultRO<Payload> {
-  requestId?: string;
   success: boolean;
+  requestId?: string;
   errorObject?: ResultErrorDTO;
   result?: Payload;
   paging?: PagingRO;
@@ -51,28 +55,13 @@ export interface FilterField {
 export interface BaseModelFilter {
   start: number;
   limit: number;
-  orderBy: string;
-  orderDesc: boolean;
   orders: OrderDTO[];
-  returnColumn: string;
-  cacheKey: string;
+  returnColumn?: string;
+  cacheKey?: string;
 }
 
 export interface DynamicModelFilter extends BaseModelFilter {
   filterFields: FilterField[];
-}
-
-export interface BaseRO<ID> {
-  id: ID;
-  creationTime: number;
-}
-
-export interface BaseJpaRO extends BaseRO<number> {
-  id: number;
-}
-
-export interface BaseJpaUpdatableRO extends BaseJpaRO {
-  lastUpdateTime: number;
 }
 
 export interface PagingRO {
@@ -81,6 +70,30 @@ export interface PagingRO {
   total: number;
   hasMore: boolean;
 }
+
+export interface ParamDefinition {
+  name: string;
+  type: string;
+}
+
+export interface ExceptionDisplayDTO {
+  key: string;
+  fullName: string;
+  params: ParamDefinition[];
+}
+
+export interface ErrorField {
+  fieldName: string;
+  message: string;
+  attributes: {[index: string]: any};
+}
+
+export interface KeyValuePair<K, V> {
+  key: K;
+  value: V;
+}
+
+export type DateAsNumber = number;
 
 export type FilterFieldOperation =
   | "Equal"
