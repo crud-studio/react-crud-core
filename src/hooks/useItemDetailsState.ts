@@ -120,7 +120,7 @@ export const useItemDetailsState = <EntityRO extends AbstractJpaRO>(
 
       if (!item || item.id !== saveState.result.id || !hasChanges) {
         setItem(saveState.result);
-        setItemId(saveState.result.id || 0);
+        setItemId(saveState.result.id);
       }
 
       setSaving(false);

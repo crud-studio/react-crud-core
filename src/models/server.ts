@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 export interface AbstractJpaRO {
-  id?: number;
+  id: number;
 }
 
 export interface AbstractJpaUpdatableRO extends AbstractJpaRO {
