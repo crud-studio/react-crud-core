@@ -10,6 +10,8 @@ export const useUrlState = <T>(
   stateStringify: ((state: T) => string) | null = null,
   addToHistory: boolean = false
 ): [T, Dispatch<SetStateAction<T>>] => {
+  const [pathname] = useState<string>(window.location.pathname);
+
   const getInitialState = (): T => {
     let urlParamValue = getUrlParam(urlParam, "");
     if (urlParamValue && stateParser) {
@@ -35,7 +37,9 @@ export const useUrlState = <T>(
       removeUrlParam(urlParam, addToHistory);
     }
     return () => {
-      removeUrlParam(urlParam, false);
+      if (_.isEqual(pathname, window.location.pathname) && !!getUrlParam(urlParam)) {
+        removeUrlParam(urlParam, false);
+      }
     };
   }, [state]);
 
