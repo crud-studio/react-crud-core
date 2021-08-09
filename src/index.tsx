@@ -1,4 +1,5 @@
 import cacheAdapterEnhancer from "./apis/adapters/cacheAdapterEnhancer";
+import encryptionAdapterEnhancer from "./apis/adapters/encryptionAdapterEnhancer";
 import throttleAdapterEnhancer from "./apis/adapters/throttleAdapterEnhancer";
 import useGenericRequest from "./apis/hooks/base/useGenericRequest";
 import {RequestConfig, RequestOptions} from "./apis/hooks/base/useGenericRequest";
@@ -15,6 +16,7 @@ import useCrudSearchCount from "./apis/hooks/crud/useCrudSearchCount";
 import useCrudShow from "./apis/hooks/crud/useCrudShow";
 import useCrudUpdate from "./apis/hooks/crud/useCrudUpdate";
 import useCrudUpdateMany from "./apis/hooks/crud/useCrudUpdateMany";
+import EncryptionUtils from "./helpers/EncryptionUtils";
 import Fingerprint from "./helpers/Fingerprint";
 import LocalStorageWrapper from "./helpers/LocalStorageWrapper";
 import {findValues, notEmpty, typeCheck} from "./helpers/ObjectUtils";
@@ -38,10 +40,10 @@ import useScript from "./hooks/useScript";
 import {useUrlState} from "./hooks/useUrlState";
 import {useUrlStateString} from "./hooks/useUrlStateString";
 
-export {cacheAdapterEnhancer, throttleAdapterEnhancer};
+export {cacheAdapterEnhancer, encryptionAdapterEnhancer, throttleAdapterEnhancer};
 
 export {findValues, notEmpty, typeCheck};
-export {Fingerprint, LocalStorageWrapper, UpdatePackUtils};
+export {Fingerprint, EncryptionUtils, LocalStorageWrapper, UpdatePackUtils};
 export {
   UrlOptions,
   addUrlParams,

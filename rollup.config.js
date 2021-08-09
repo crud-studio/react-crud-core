@@ -17,6 +17,8 @@ export default {
   external: [
     "axios",
     "axios-hooks",
+    "crypto-js",
+    "elliptic",
     "fingerprintjs2",
     "lodash",
     "lru-cache",

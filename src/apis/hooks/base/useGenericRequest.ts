@@ -21,6 +21,7 @@ export interface RequestOptions<ResponseRO> {
   cacheAutoReload?: boolean;
   throttle?: boolean;
   autoCancel?: boolean;
+  encrypt?: boolean;
   timeout?: number;
   resultTransformer?: (responseData: any) => ResponseRO | null;
   successTransformer?: (responseData: any) => boolean;
@@ -38,6 +39,7 @@ function useGenericRequest<ResponseRO>(
     cacheAutoReload = false,
     throttle = false,
     autoCancel = true,
+    encrypt = false,
     timeout = 0,
     resultTransformer,
     successTransformer,
@@ -64,6 +66,7 @@ function useGenericRequest<ResponseRO>(
         clearCache: clearCache,
         cacheName: cacheName,
         throttle: throttle,
+        encrypt: encrypt,
         timeout: timeout,
         onUploadProgress: requestConfig?.onUploadProgress,
       },
