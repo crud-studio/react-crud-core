@@ -10,6 +10,7 @@ interface Options {
   cache?: boolean;
   throttle?: boolean;
   cacheAutoReload?: boolean;
+  encrypt?: boolean;
 }
 
 function useCrudSearch<ResponseRO>(
@@ -24,6 +25,7 @@ function useCrudSearch<ResponseRO>(
     cache: false,
     throttle: false,
     cacheAutoReload: false,
+    encrypt: false,
   }
 ): GenericRequestStateSearch<ResponseRO> {
   const [items, setItems] = useState<ResponseRO[]>([]);
@@ -49,6 +51,7 @@ function useCrudSearch<ResponseRO>(
       cacheName: entity.api.cacheName,
       cacheAutoReload: options?.cacheAutoReload && options?.count,
       throttle: options?.throttle,
+      encrypt: options?.encrypt,
       resultTransformer: (responseData) => responseData,
     }
   );

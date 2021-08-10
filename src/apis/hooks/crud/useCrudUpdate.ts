@@ -4,9 +4,16 @@ import useGenericRequest from "../base/useGenericRequest";
 import {AbstractJpaRO} from "../../../models/server";
 import {PartialDeep} from "type-fest";
 
+interface Options {
+  encrypt?: boolean;
+}
+
 function useCrudUpdate<ResponseRO extends AbstractJpaRO>(
   entity: BaseEntity,
-  dataItem: PartialDeep<ResponseRO> | undefined
+  dataItem: PartialDeep<ResponseRO> | undefined,
+  options: Options = {
+    encrypt: false,
+  }
 ): GenericRequestState<ResponseRO> {
   return useGenericRequest<ResponseRO>(
     {
@@ -18,6 +25,7 @@ function useCrudUpdate<ResponseRO extends AbstractJpaRO>(
       manual: true,
       clearCache: true,
       cacheName: entity.api.cacheName,
+      encrypt: options?.encrypt,
     }
   );
 }

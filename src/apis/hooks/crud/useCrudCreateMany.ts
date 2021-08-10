@@ -3,9 +3,16 @@ import {BaseEntity} from "../../../models/entity";
 import useGenericRequestMany from "../base/useGenericRequestMany";
 import {PartialDeep} from "type-fest";
 
+interface Options {
+  encrypt?: boolean;
+}
+
 function useCrudCreateMany<RequestRO, ResponseRO>(
   entity: BaseEntity,
-  createItems: PartialDeep<RequestRO>[] | undefined
+  createItems: PartialDeep<RequestRO>[] | undefined,
+  options: Options = {
+    encrypt: false,
+  }
 ): GenericRequestStateMany<PartialDeep<RequestRO>, ResponseRO> {
   return useGenericRequestMany<PartialDeep<RequestRO>, ResponseRO>(
     {
@@ -17,6 +24,7 @@ function useCrudCreateMany<RequestRO, ResponseRO>(
       manual: true,
       clearCache: true,
       cacheName: entity.api.cacheName,
+      encrypt: options?.encrypt,
     }
   );
 }

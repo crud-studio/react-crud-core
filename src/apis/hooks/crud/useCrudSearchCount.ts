@@ -7,6 +7,7 @@ interface Options {
   manual?: boolean;
   cache?: boolean;
   throttle?: boolean;
+  encrypt?: boolean;
 }
 
 function useCrudSearchCount(
@@ -16,6 +17,7 @@ function useCrudSearchCount(
     manual: false,
     cache: false,
     throttle: false,
+    encrypt: false,
   }
 ): GenericRequestState<number> {
   return useGenericRequest<number>(
@@ -31,6 +33,7 @@ function useCrudSearchCount(
       cache: options?.cache,
       cacheName: entity.api.cacheName,
       throttle: options?.throttle,
+      encrypt: options?.encrypt,
     }
   );
 }

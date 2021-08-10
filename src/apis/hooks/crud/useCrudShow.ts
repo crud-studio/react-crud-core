@@ -6,6 +6,7 @@ interface Options {
   manual?: boolean;
   cache?: boolean;
   throttle?: boolean;
+  encrypt?: boolean;
 }
 
 function useCrudShow<ResponseRO>(
@@ -15,6 +16,7 @@ function useCrudShow<ResponseRO>(
     manual: false,
     cache: false,
     throttle: false,
+    encrypt: false,
   }
 ): GenericRequestState<ResponseRO> {
   return useGenericRequest<ResponseRO>(
@@ -27,6 +29,7 @@ function useCrudShow<ResponseRO>(
       cache: options?.cache,
       cacheName: entity.api.cacheName,
       throttle: options?.throttle,
+      encrypt: options?.encrypt,
     }
   );
 }

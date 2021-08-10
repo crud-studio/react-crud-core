@@ -7,9 +7,16 @@ import _ from "lodash";
 import {AbstractJpaRO} from "../../../models/server";
 import {PartialDeep} from "type-fest";
 
+interface Options {
+  encrypt?: boolean;
+}
+
 function useCrudCreateOrUpdate<ResponseRO extends AbstractJpaRO>(
   entity: BaseEntity,
-  dataItem: PartialDeep<ResponseRO> | undefined
+  dataItem: PartialDeep<ResponseRO> | undefined,
+  options: Options = {
+    encrypt: false,
+  }
 ): GenericRequestState<ResponseRO> {
   const [requestItem, setRequestItem] = useState<PartialDeep<ResponseRO> | undefined>(undefined);
   const [pendingRequestItem, setPendingRequestItem] = useState<PartialDeep<ResponseRO> | undefined>(undefined);
@@ -28,8 +35,8 @@ function useCrudCreateOrUpdate<ResponseRO extends AbstractJpaRO>(
     }
   }, [requestItem]);
 
-  const createState = useCrudCreate<ResponseRO, ResponseRO>(entity, requestItem);
-  const updateState = useCrudUpdate<ResponseRO>(entity, requestItem);
+  const createState = useCrudCreate<ResponseRO, ResponseRO>(entity, requestItem, options);
+  const updateState = useCrudUpdate<ResponseRO>(entity, requestItem, options);
 
   useEffect(() => {
     if (createState.result) {
