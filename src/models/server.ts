@@ -93,6 +93,26 @@ export interface KeyValuePair<K, V> {
   value: V;
 }
 
+export interface MediaFileRO extends AbstractJpaUpdatableRO {
+  uuid?: string;
+  name?: string;
+  extension?: string;
+  size?: number;
+  alias?: string;
+  description?: string;
+  creatorObjectId?: number;
+  creatorObjectType?: string;
+  fileHash?: string;
+}
+
+export interface MinimalMediaFileRO extends AbstractJpaUpdatableRO {
+  uuid?: string;
+  name?: string;
+  extension?: string;
+  size?: number;
+  alias?: string;
+}
+
 export type DateAsNumber = number;
 
 export type FilterFieldOperation =
