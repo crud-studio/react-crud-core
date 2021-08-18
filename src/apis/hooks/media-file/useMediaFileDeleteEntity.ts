@@ -2,7 +2,7 @@ import {GenericRequestState} from "../../../models/internal";
 import {BaseEntity} from "../../../models/entity";
 import useGenericRequest from "../base/useGenericRequest";
 
-function useEntityFileDelete(
+function useMediaFileDeleteEntity(
   entity: BaseEntity,
   entityId: number | undefined,
   columnName: string
@@ -20,4 +20,4 @@ function useEntityFileDelete(
     }
   );
 }
-export default useEntityFileDelete;
+export default useMediaFileDeleteEntity;

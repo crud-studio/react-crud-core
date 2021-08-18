@@ -5,7 +5,7 @@ interface Options {
   manual?: boolean;
 }
 
-function useDownloadMediaFile(
+function useMediaFileDownload(
   fileUuid: string,
   options: Options = {
     manual: false,
@@ -26,4 +26,4 @@ function useDownloadMediaFile(
     }
   );
 }
-export default useDownloadMediaFile;
+export default useMediaFileDownload;

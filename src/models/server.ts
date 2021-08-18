@@ -148,3 +148,5 @@ export type FilterFieldDataType =
   | "Object"
   | "Enum"
   | "None";
+
+export type MediaFileAclMode = "PRIVATE" | "LOGGED_IN" | "PUBLIC";

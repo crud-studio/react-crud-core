@@ -16,9 +16,10 @@ import useCrudSearchCount from "./apis/hooks/crud/useCrudSearchCount";
 import useCrudShow from "./apis/hooks/crud/useCrudShow";
 import useCrudUpdate from "./apis/hooks/crud/useCrudUpdate";
 import useCrudUpdateMany from "./apis/hooks/crud/useCrudUpdateMany";
-import useEntityFileDelete from "./apis/hooks/media-file/useEntityFileDelete";
-import useEntityFileDownload from "./apis/hooks/media-file/useEntityFileDownload";
-import useEntityFileUpload from "./apis/hooks/media-file/useEntityFileUpload";
+import useMediaFileDeleteEntity from "./apis/hooks/media-file/useMediaFileDeleteEntity";
+import useMediaFileDownload from "./apis/hooks/media-file/useMediaFileDownload";
+import useMediaFileUpload from "./apis/hooks/media-file/useMediaFileUpload";
+import useMediaFileUploadEntity from "./apis/hooks/media-file/useMediaFileUploadEntity";
 import EncryptionUtils from "./helpers/EncryptionUtils";
 import Fingerprint from "./helpers/Fingerprint";
 import LocalStorageWrapper from "./helpers/LocalStorageWrapper";
@@ -82,10 +83,8 @@ export {
   useCrudShow,
   useCrudUpdate,
   useCrudUpdateMany,
-  useEntityFileDelete,
-  useEntityFileDownload,
-  useEntityFileUpload,
 };
+export {useMediaFileDeleteEntity, useMediaFileDownload, useMediaFileUpload, useMediaFileUploadEntity};
 
 export * from "./models/entity";
 export * from "./models/internal";

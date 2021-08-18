@@ -1,13 +1,15 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {GenericRequestStateUpload} from "../../../models/internal";
 import useGenericRequest from "./useGenericRequest";
+import _ from "lodash";
 
 function useGenericRequestUpload<ResponseRO>(
   file: File | undefined,
-  url: string
+  url: string,
+  data?: {[key: string]: any}
 ): GenericRequestStateUpload<ResponseRO> {
   const [progress, setProgress] = useState<number>(0);
-  const [formData, setFormData] = useState<FormData | null>(null);
+  const [formData, setFormData] = useState<FormData | undefined>(undefined);
 
   const {
     result,
@@ -36,7 +38,7 @@ function useGenericRequestUpload<ResponseRO>(
     }
   );
 
-  const executeRequest = () => {
+  const executeRequest = useCallback((): void => {
     if (!file) {
       return;
     }
@@ -47,8 +49,15 @@ function useGenericRequestUpload<ResponseRO>(
     fileFormData.append("file", file);
     fileFormData.append("alias", file.name);
     fileFormData.append("type", "File");
+
+    if (data) {
+      _.forEach(data, function (value, key) {
+        fileFormData.append(key, value);
+      });
+    }
+
     setFormData(fileFormData);
-  };
+  }, [file, data, setProgress, setFormData]);
 
   useEffect(() => {
     if (formData) {

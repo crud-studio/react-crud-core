@@ -4,11 +4,11 @@ import {BaseEntity} from "../../../models/entity";
 import useGenericRequestUpload from "../base/useGenericRequestUpload";
 import {useMemo} from "react";
 
-function useEntityFileUpload(
+function useMediaFileUploadEntity(
+  file: File | undefined,
   entity: BaseEntity,
   entityId: number | undefined,
-  columnName: string,
-  file: File | undefined
+  columnName: string
 ): GenericRequestState<MediaFileRO> {
   const url = useMemo<string>(
     () => `/mediaFile/uploadAndAssociate/${entityId}/${entity.name}/${columnName}`,
@@ -17,4 +17,4 @@ function useEntityFileUpload(
 
   return useGenericRequestUpload<MediaFileRO>(file, url);
 }
-export default useEntityFileUpload;
+export default useMediaFileUploadEntity;
