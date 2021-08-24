@@ -8,7 +8,7 @@ interface Options {
 }
 
 function useMediaFileUpload(file: File | undefined, options?: Options): GenericRequestStateUpload<MediaFileRO> {
-  const url = useMemo<string>(() => `/mediaFile/uploadAndAssociate`, []);
+  const url = useMemo<string>(() => `/mediaFile/upload`, []);
   const data = useMemo<{[key: string]: any}>(() => ({aclMode: options?.acl || "PRIVATE"}), [options]);
 
   return useGenericRequestUpload<MediaFileRO>(file, url, data);
