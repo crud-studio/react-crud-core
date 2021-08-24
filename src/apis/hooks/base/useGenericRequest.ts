@@ -117,7 +117,7 @@ function useGenericRequest<ResponseRO>(
       setLoading(true);
       setError(undefined);
       setExecuted(false);
-      executeAxiosRequest();
+      executeAxiosRequest().catch((error) => setError(error));
     }
   }, [requestConfig]);
 
