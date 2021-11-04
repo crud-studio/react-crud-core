@@ -113,6 +113,11 @@ export interface MinimalMediaFileRO extends AbstractJpaUpdatableRO {
   alias?: string;
 }
 
+export interface RemoteStorageValueDTO {
+  identifier?: string;
+  value?: string;
+}
+
 export type DateAsNumber = number;
 
 export type FilterFieldOperation =

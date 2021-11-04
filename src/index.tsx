@@ -20,6 +20,8 @@ import useMediaFileDeleteEntity from "./apis/hooks/media-file/useMediaFileDelete
 import useMediaFileDownload from "./apis/hooks/media-file/useMediaFileDownload";
 import useMediaFileUpload from "./apis/hooks/media-file/useMediaFileUpload";
 import useMediaFileUploadEntity from "./apis/hooks/media-file/useMediaFileUploadEntity";
+import useRemoteStorage from "./contexts/remote-storage/hooks/useRemoteStorage";
+import {RemoteStorageContext, RemoteStorageProvider} from "./contexts/remote-storage/RemoteStorageContext";
 import EncryptionUtils from "./helpers/EncryptionUtils";
 import Fingerprint from "./helpers/Fingerprint";
 import LocalStorageWrapper from "./helpers/LocalStorageWrapper";
@@ -39,12 +41,15 @@ import {
 import useDebounceFn from "./hooks/useDebounceFn";
 import {useItemDetailsState} from "./hooks/useItemDetailsState";
 import {useItemIdUrlState} from "./hooks/useItemIdUrlState";
+import {useLocalStorageState} from "./hooks/useLocalStorageState";
 import {usePagination} from "./hooks/usePagination";
 import useScript from "./hooks/useScript";
 import {useUrlState} from "./hooks/useUrlState";
 import {useUrlStateString} from "./hooks/useUrlStateString";
 
 export {cacheAdapterEnhancer, encryptionAdapterEnhancer, throttleAdapterEnhancer};
+
+export {RemoteStorageContext, RemoteStorageProvider, useRemoteStorage};
 
 export {findValues, notEmpty, typeCheck};
 export {Fingerprint, EncryptionUtils, LocalStorageWrapper, UpdatePackUtils};
@@ -64,6 +69,7 @@ export {
   useDebounceFn,
   useItemDetailsState,
   useItemIdUrlState,
+  useLocalStorageState,
   usePagination,
   useScript,
   useUrlState,
