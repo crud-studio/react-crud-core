@@ -1,4 +1,4 @@
-import React, {FunctionComponent, PropsWithChildren, useCallback, useEffect, useState} from "react";
+import React, {FunctionComponent, PropsWithChildren, useCallback, useEffect, useRef, useState} from "react";
 import {useLocalStorageState} from "../../hooks/useLocalStorageState";
 import {
   PARAM_REMOTE_STORAGE_IDENTIFIERS_TO_DELETE,
@@ -25,9 +25,13 @@ interface IProps extends PropsWithChildren<any> {
   autoRefresh?: boolean;
 }
 
+interface RemoteStorageValueTimed extends RemoteStorageValueDTO {
+  updateTime: number;
+}
+
 const RemoteStorageProvider: FunctionComponent<IProps> = ({loggedIn, autoRefresh = true, children}) => {
   const [lastUpdateTime, setLastUpdateTime] = useLocalStorageState<number>(PARAM_REMOTE_STORAGE_LAST_UPDATE_TIME, 0);
-  const [values, setValues] = useLocalStorageState<RemoteStorageValueDTO[] | null>(PARAM_REMOTE_STORAGE_VALUES, null);
+  const [values, setValues] = useLocalStorageState<RemoteStorageValueTimed[] | null>(PARAM_REMOTE_STORAGE_VALUES, null);
   const [refreshFlag, setRefreshFlag] = useState<number>(0);
 
   const [valuesToSave, setValuesToSave] = useLocalStorageState<RemoteStorageValueDTO[]>(
@@ -43,6 +47,8 @@ const RemoteStorageProvider: FunctionComponent<IProps> = ({loggedIn, autoRefresh
   const [selectedIdentifierToDelete, setSelectedIdentifierToDelete] = useState<string | null>(null);
 
   const getValuesState = useRemoteStorageGetValues();
+  const getValuesRequestTime = useRef<number>(0);
+
   const saveState = useRemoteStorageSetValue(selectedValueToSave?.identifier || "", selectedValueToSave?.value || "");
   const deleteState = useRemoteStorageDeleteValue(selectedIdentifierToDelete || "");
 
@@ -51,6 +57,7 @@ const RemoteStorageProvider: FunctionComponent<IProps> = ({loggedIn, autoRefresh
       const now = new Date().getTime();
       if (now - lastUpdateTime > 60000) {
         getValuesState.executeRequest();
+        getValuesRequestTime.current = now;
       }
     }
   }, [loggedIn, refreshFlag]);
@@ -66,9 +73,21 @@ const RemoteStorageProvider: FunctionComponent<IProps> = ({loggedIn, autoRefresh
   }, []);
 
   useEffect(() => {
-    if (getValuesState.result) {
-      setValues(getValuesState.result);
-      setLastUpdateTime(new Date().getTime());
+    const resultValues = getValuesState.result;
+    if (resultValues) {
+      const now = new Date().getTime();
+      setLastUpdateTime(now);
+      setValues((currentValues) => {
+        const recentClientChanges = (currentValues || []).filter((v) => v.updateTime > getValuesRequestTime.current);
+        recentClientChanges.forEach((recentClientChange) => {
+          _.remove(resultValues, (v) => v.identifier === recentClientChange.identifier);
+        });
+
+        return [
+          ...recentClientChanges,
+          ...resultValues.map<RemoteStorageValueTimed>((dto) => ({...dto, updateTime: now})),
+        ];
+      });
     }
   }, [getValuesState.result]);
 
@@ -90,8 +109,8 @@ const RemoteStorageProvider: FunctionComponent<IProps> = ({loggedIn, autoRefresh
   }, [selectedValueToSave]);
 
   useEffect(() => {
-    if (saveState.result) {
-      const savedValue = saveState.result;
+    const savedValue = saveState.result;
+    if (savedValue) {
       setValuesToSave((currentValuesToSave) =>
         // If the value is different it means there is a later update to this identifier and we should not remove it.
         currentValuesToSave.filter((v) => v.identifier !== savedValue.identifier || v.value !== savedValue.value)
@@ -151,10 +170,11 @@ const RemoteStorageProvider: FunctionComponent<IProps> = ({loggedIn, autoRefresh
       }
 
       const valueString = JSON.stringify(value);
+      const now = new Date().getTime();
 
       setValues((currentValues) => [
         ...(currentValues || []).filter((v) => v.identifier !== identifier),
-        {identifier: identifier, value: valueString},
+        {identifier: identifier, value: valueString, updateTime: now},
       ]);
 
       setValuesToSave((currentValuesToSave) => [
