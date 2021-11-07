@@ -24,7 +24,7 @@ function useRemoteStorageGetValues(
     {
       url: `${remoteStorageEntity.api.path}/getValues`,
       method: "POST",
-      data: filter,
+      data: filter || {},
     },
     {
       manual: options?.manual,

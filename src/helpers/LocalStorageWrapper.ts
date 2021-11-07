@@ -19,10 +19,12 @@ const LocalStorageWrapper = {
 
     let ls = this.getLocalStorage();
 
-    let value;
-    try {
-      value = ls.get(key);
-    } catch (e) {}
+    let value = undefined;
+    if (ls.getAllKeys().includes(key)) {
+      try {
+        value = ls.get(key);
+      } catch (e) {}
+    }
 
     cache[key] = value;
     return value;

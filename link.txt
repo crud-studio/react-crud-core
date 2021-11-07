@@ -1,0 +1,20 @@
+rm -rf ~/.config/yarn/link/*
+
+yarn link
+cd node_modules/axios
+yarn link
+cd ../../node_modules/axios-hooks
+yarn link
+cd ../../node_modules/react
+yarn link
+cd ../../node_modules/react-dom
+yarn link
+cd ../../
+
+
+yarn link @crud-studio/react-crud-core
+yarn link axios
+yarn link axios-hooks
+yarn link react
+yarn link react-dom
+

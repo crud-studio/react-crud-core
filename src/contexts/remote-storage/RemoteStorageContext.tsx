@@ -1,4 +1,4 @@
-import React, {FunctionComponent, PropsWithChildren, useCallback, useEffect, useRef, useState} from "react";
+import React, {FunctionComponent, PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {useLocalStorageState} from "../../hooks/useLocalStorageState";
 import {
   PARAM_REMOTE_STORAGE_IDENTIFIERS_TO_DELETE,
@@ -13,6 +13,8 @@ import useRemoteStorageSetValue from "../../apis/hooks/remote-storage/useRemoteS
 import useRemoteStorageGetValues from "../../apis/hooks/remote-storage/useRemoteStorageGetValues";
 
 interface IRemoteStorageContext {
+  initialized: boolean;
+  lastUpdateTime: number;
   getValue: <T>(identifier: string) => T | null;
   setValue: <T>(identifier: string, value: T | null) => void;
   deleteValue: (identifier: string) => void;
@@ -33,6 +35,8 @@ const RemoteStorageProvider: FunctionComponent<IProps> = ({loggedIn, autoRefresh
   const [lastUpdateTime, setLastUpdateTime] = useLocalStorageState<number>(PARAM_REMOTE_STORAGE_LAST_UPDATE_TIME, 0);
   const [values, setValues] = useLocalStorageState<RemoteStorageValueTimed[] | null>(PARAM_REMOTE_STORAGE_VALUES, null);
   const [refreshFlag, setRefreshFlag] = useState<number>(0);
+
+  const initialized = useMemo<boolean>(() => lastUpdateTime > 0, [lastUpdateTime]);
 
   const [valuesToSave, setValuesToSave] = useLocalStorageState<RemoteStorageValueDTO[]>(
     PARAM_REMOTE_STORAGE_VALUES_TO_SAVE,
@@ -145,25 +149,37 @@ const RemoteStorageProvider: FunctionComponent<IProps> = ({loggedIn, autoRefresh
 
   const getValue = useCallback(
     <T,>(identifier: string): T | null => {
+      if (!loggedIn) {
+        return null;
+      }
+
       const remoteStorageValue = _.find(values, {identifier: identifier});
       return remoteStorageValue?.value ? JSON.parse(remoteStorageValue.value) : null;
     },
-    [values]
+    [values, loggedIn]
   );
 
   const deleteValue = useCallback(
     (identifier: string): void => {
+      if (!loggedIn) {
+        return;
+      }
+
       setValues((currentValues) => (currentValues || []).filter((value) => value.identifier !== identifier));
       setIdentifiersToDelete((currentIdentifiersToDelete) => [
         ...currentIdentifiersToDelete.filter((i) => i !== identifier),
         identifier,
       ]);
     },
-    [values]
+    [loggedIn, setValues, setIdentifiersToDelete]
   );
 
   const setValue = useCallback(
     <T,>(identifier: string, value: T | null): void => {
+      if (!loggedIn) {
+        return;
+      }
+
       if (_.isNil(value)) {
         deleteValue(identifier);
         return;
@@ -182,11 +198,13 @@ const RemoteStorageProvider: FunctionComponent<IProps> = ({loggedIn, autoRefresh
         {identifier: identifier, value: valueString},
       ]);
     },
-    [values]
+    [values, loggedIn, deleteValue, setValues, setValuesToSave]
   );
 
   return (
-    <RemoteStorageContext.Provider value={{getValue, setValue, deleteValue}}>{children}</RemoteStorageContext.Provider>
+    <RemoteStorageContext.Provider value={{initialized, lastUpdateTime, getValue, setValue, deleteValue}}>
+      {children}
+    </RemoteStorageContext.Provider>
   );
 };
 
