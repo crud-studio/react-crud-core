@@ -50,11 +50,28 @@ const RemoteStorageProvider: FunctionComponent<IProps> = ({loggedIn, autoRefresh
   );
   const [selectedIdentifierToDelete, setSelectedIdentifierToDelete] = useState<string | null>(null);
 
-  const getValuesState = useRemoteStorageGetValues();
+  const getValuesState = useRemoteStorageGetValues(undefined, {
+    cache: false,
+    manual: true,
+    throttle: true,
+    encrypt: false,
+  });
   const getValuesRequestTime = useRef<number>(0);
 
   const saveState = useRemoteStorageSetValue(selectedValueToSave?.identifier || "", selectedValueToSave?.value || "");
   const deleteState = useRemoteStorageDeleteValue(selectedIdentifierToDelete || "");
+
+  useEffect(() => {
+    if (!loggedIn) {
+      setLastUpdateTime(0);
+      setValues(null);
+      setValuesToSave([]);
+      setSelectedValueToSave(null);
+      setIdentifiersToDelete([]);
+      setSelectedIdentifierToDelete(null);
+      getValuesRequestTime.current = 0;
+    }
+  }, [loggedIn]);
 
   useEffect(() => {
     if (loggedIn && !getValuesState.loading) {

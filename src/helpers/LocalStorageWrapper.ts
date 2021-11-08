@@ -41,5 +41,11 @@ const LocalStorageWrapper = {
     ls.remove(key);
     delete cache[key];
   },
+
+  clear: function (): void {
+    let ls = this.getLocalStorage();
+    ls.clear();
+    cache = {};
+  },
 };
 export default LocalStorageWrapper;

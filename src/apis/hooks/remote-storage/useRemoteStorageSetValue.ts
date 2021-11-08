@@ -3,7 +3,7 @@ import {BaseEntity} from "../../../models/entity";
 import useGenericRequest from "../base/useGenericRequest";
 import {DynamicModelFilter, RemoteStorageValueDTO} from "../../../models/server";
 import {remoteStorageEntity} from "../../../entities/remote-storage.entity";
-import {useEffect, useRef} from "react";
+import {useCallback, useEffect, useRef} from "react";
 
 interface Options {
   encrypt?: boolean;
@@ -16,20 +16,18 @@ function useRemoteStorageSetValue(
     encrypt: false,
   }
 ): GenericRequestState<RemoteStorageValueDTO> {
-  const formDataRef = useRef<FormData | null>(null);
-
-  useEffect(() => {
+  const getFormData = useCallback((identifier: string, value: string): FormData => {
     const formData = new FormData();
     formData.set("identifier", identifier);
     formData.set("value", value);
-    formDataRef.current = formData;
-  }, [identifier, value]);
+    return formData;
+  }, []);
 
   return useGenericRequest<RemoteStorageValueDTO>(
     {
       url: `${remoteStorageEntity.api.path}/setValue`,
       method: "POST",
-      data: formDataRef.current,
+      data: getFormData(identifier, value),
     },
     {
       manual: true,
