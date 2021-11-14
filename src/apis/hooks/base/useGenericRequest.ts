@@ -96,6 +96,8 @@ function useGenericRequest<ResponseRO>(
       return;
     }
 
+    setLoading(false);
+
     const success = successTransformer ? successTransformer(responseData) : responseData.success;
     if (success) {
       setResult(resultTransformer ? resultTransformer(responseData) : responseData.result);
