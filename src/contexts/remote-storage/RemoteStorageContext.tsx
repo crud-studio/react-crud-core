@@ -25,13 +25,19 @@ const RemoteStorageContext = React.createContext<IRemoteStorageContext>(undefine
 interface IProps extends PropsWithChildren<any> {
   loggedIn: boolean;
   autoRefresh?: boolean;
+  refreshInterval?: number;
 }
 
 interface RemoteStorageValueTimed extends RemoteStorageValueDTO {
   updateTime: number;
 }
 
-const RemoteStorageProvider: FunctionComponent<IProps> = ({loggedIn, autoRefresh = true, children}) => {
+const RemoteStorageProvider: FunctionComponent<IProps> = ({
+  loggedIn,
+  autoRefresh = true,
+  refreshInterval = 1_800_000,
+  children,
+}) => {
   const [lastUpdateTime, setLastUpdateTime] = useLocalStorageState<number>(PARAM_REMOTE_STORAGE_LAST_UPDATE_TIME, 0);
   const [values, setValues] = useLocalStorageState<RemoteStorageValueTimed[] | null>(PARAM_REMOTE_STORAGE_VALUES, null);
   const [refreshFlag, setRefreshFlag] = useState<number>(0);
@@ -84,9 +90,13 @@ const RemoteStorageProvider: FunctionComponent<IProps> = ({loggedIn, autoRefresh
   }, [loggedIn, refreshFlag]);
 
   useEffect(() => {
+    if (!autoRefresh) {
+      return;
+    }
+
     const interval = setInterval(() => {
       setRefreshFlag((currentRefreshFlag) => currentRefreshFlag + 1);
-    }, 1_800_000);
+    }, refreshInterval);
 
     return () => {
       clearInterval(interval);
