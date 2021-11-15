@@ -16,18 +16,12 @@ function useRemoteStorageSetValue(
     encrypt: false,
   }
 ): GenericRequestState<RemoteStorageValueDTO> {
-  const getFormData = useCallback((identifier: string, value: string): FormData => {
-    const formData = new FormData();
-    formData.set("identifier", identifier);
-    formData.set("value", value);
-    return formData;
-  }, []);
-
   return useGenericRequest<RemoteStorageValueDTO>(
     {
-      url: `${remoteStorageEntity.api.path}/setValue`,
+      url: `${remoteStorageEntity.api.path}/setValue?identifier=${encodeURIComponent(
+        identifier
+      )}&value=${encodeURIComponent(value)}`,
       method: "POST",
-      data: getFormData(identifier, value),
     },
     {
       manual: true,

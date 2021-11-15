@@ -10,7 +10,7 @@ interface Options {}
 function useRemoteStorageDeleteValue(identifier: string, options: Options = {}): GenericRequestState<boolean> {
   return useGenericRequest<boolean>(
     {
-      url: `${remoteStorageEntity.api.path}/deleteValue?identifier=${identifier}`,
+      url: `${remoteStorageEntity.api.path}/deleteValue?identifier=${encodeURIComponent(identifier)}`,
       method: "DELETE",
     },
     {

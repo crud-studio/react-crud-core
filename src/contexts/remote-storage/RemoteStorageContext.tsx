@@ -123,23 +123,6 @@ const RemoteStorageProvider: FunctionComponent<IProps> = ({
   }, [getValuesState.result]);
 
   useEffect(() => {
-    if (saveState.loading) {
-      return;
-    }
-
-    const selectedValueToSave = _.first(valuesToSave);
-    if (selectedValueToSave) {
-      setSelectedValueToSave(selectedValueToSave);
-    }
-  }, [valuesToSave, saveState.result]);
-
-  useEffect(() => {
-    if (selectedValueToSave) {
-      saveState.executeRequest();
-    }
-  }, [selectedValueToSave]);
-
-  useEffect(() => {
     const savedValue = saveState.result;
     if (savedValue) {
       setValuesToSave((currentValuesToSave) =>
@@ -148,6 +131,23 @@ const RemoteStorageProvider: FunctionComponent<IProps> = ({
       );
     }
   }, [saveState.result]);
+
+  useEffect(() => {
+    if (saveState.loading) {
+      return;
+    }
+
+    const selectedValueToSave = _.first(valuesToSave);
+    if (selectedValueToSave) {
+      setSelectedValueToSave(selectedValueToSave);
+    }
+  }, [valuesToSave]);
+
+  useEffect(() => {
+    if (selectedValueToSave) {
+      saveState.executeRequest();
+    }
+  }, [selectedValueToSave]);
 
   useEffect(() => {
     if (deleteState.loading) {
