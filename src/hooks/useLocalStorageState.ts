@@ -11,15 +11,18 @@ export const useLocalStorageState = <S>(key: string, initialState: S | (() => S)
     return _.isFunction(initialState) ? initialState() : initialState;
   });
 
-  const setValue = (value: SetStateAction<S>): SetStateAction<S> => {
-    const valueToStore = _.isFunction(value) ? value(item) : value;
-    setInnerValue(valueToStore);
-    if (!_.isNil(valueToStore)) {
-      LocalStorageWrapper.set(key, valueToStore);
-    } else {
-      LocalStorageWrapper.remove(key);
-    }
-    return value;
+  const setValue = (value: SetStateAction<S>): void => {
+    setInnerValue((currentInnerValue) => {
+      const valueToStore = _.isFunction(value) ? value(currentInnerValue) : value;
+
+      if (!_.isNil(valueToStore)) {
+        LocalStorageWrapper.set(key, valueToStore);
+      } else {
+        LocalStorageWrapper.remove(key);
+      }
+
+      return valueToStore;
+    });
   };
 
   return [item, setValue];
