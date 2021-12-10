@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 
 export const usePagination = <T>(
   items: T[],
@@ -12,22 +12,14 @@ export const usePagination = <T>(
   },
   (currentPage: number) => void
 ] => {
-  const [pageItems, setPageItems] = useState<T[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(1);
 
-  useEffect(() => {
-    if (items) {
-      setTotalPages(Math.max(Math.ceil(items.length / pageSize), 1));
-    }
-  }, [items]);
+  const totalPages = useMemo<number>(() => Math.max(Math.ceil(items.length / pageSize), 1), [items, pageSize]);
 
-  useEffect(() => {
-    if (items) {
-      let startIndex = (currentPage - 1) * pageSize;
-      let endIndex = startIndex + pageSize;
-      setPageItems(items.slice(startIndex, endIndex));
-    }
+  const pageItems = useMemo<T[]>(() => {
+    let startIndex = (currentPage - 1) * pageSize;
+    let endIndex = startIndex + pageSize;
+    return items.slice(startIndex, endIndex);
   }, [items, currentPage]);
 
   useEffect(() => {
